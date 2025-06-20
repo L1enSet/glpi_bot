@@ -59,7 +59,6 @@ async def register_profile(message):
             data = getUser(username[1])
         except GlpiSessionError as exc:
             data = get_user(username[1])
-
         user_id = (message.chat.id)
         tg_user = (message.chat.username)
         
