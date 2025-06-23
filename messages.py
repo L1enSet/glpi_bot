@@ -10,9 +10,9 @@ def registration(user, status=None):
 
 def error_message(data):
     if data['error'] == 'not_found':
-        text = "Пользователь не найден. Сообщение администратору отправлено."
+        text = "Пользователь не найден."
     else:
-        text = "Неизвестная ошибка. Сообщение администратору отправлено."
+        text = "Неизвестная ошибка."
     return text
 
 def try_reg(username, user_id, tg_user, status):

@@ -4,10 +4,10 @@ from requests.auth import HTTPBasicAuth
 
 
 def create_profile(glpi_data, tg_id, tg_name, login, _pass, dst_url):
+    
     url = dst_url
     headers = {
         'ContentType': 'application/json',
-
         }
     auth = HTTPBasicAuth(login, _pass)
     data = glpi_data
@@ -16,7 +16,7 @@ def create_profile(glpi_data, tg_id, tg_name, login, _pass, dst_url):
     data['is_active'] = 'true'
 
     response = requests.post(url=url, headers=headers, data=data, auth=auth)
-    print(response.text)
+    #print(response.text)
     
     result = {}
     result['status'] = response.status_code
@@ -25,5 +25,5 @@ def create_profile(glpi_data, tg_id, tg_name, login, _pass, dst_url):
     elif response.status_code == 400:
         result['data'] = json.loads(response.text)
         result['error'] = "Duplicate user"
-    print(data)
+    #print(data)
     return result
