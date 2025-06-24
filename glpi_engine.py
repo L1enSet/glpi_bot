@@ -9,13 +9,14 @@ from errors import GlpiAuthError, GlpiSessionError
 
 load_dotenv()
 ADMIN_USER_TOKEN = os.getenv('ADMIN_USER_TOKEN')
+URL_GLPI = os.getenv('URL_GLPI')
 
 
 class AppMixin():
-    ssl = "https://"
-    URL_INIT = ssl+"helpdesk.ics.perm.ru/apirest.php/initSession"
-    URL_KILL = ssl+"helpdesk.ics.perm.ru/apirest.php/killSession"
-    URL_GET_USER = ssl+"helpdesk.itsperm.ru/apirest.php/User/"
+    GLPI = os.getenv('URL_GLPI')
+    URL_INIT = GLPI+"initSession"
+    URL_KILL = GLPI+"killSession"
+    URL_GET_USER = GLPI+"User/"
     HEADERS = {"Content-Type":"application/json",}
 
 
@@ -62,7 +63,7 @@ class Session(AppMixin):
 
 def searchUser(username, request_headers):
     request_headers['name'] = username
-    url = "https://helpdesk.itsperm.ru/apirest.php/search/User?is_deleted=0&as_map=0&browse=0&criteria[0][link]=AND&criteria[0][field]=1&criteria[0][searchtype]=contains&criteria[0][value]={}&itemtype=User&start=0&_glpi_csrf_token=3cea1b10a52338584999fdce55691f4ed67f29fa6d87689867f626e25d662d33&sort[]=1&order[]=ASC".format(username)
+    url = URL_GLPI+"search/User?is_deleted=0&as_map=0&browse=0&criteria[0][link]=AND&criteria[0][field]=1&criteria[0][searchtype]=contains&criteria[0][value]={}&itemtype=User&start=0&_glpi_csrf_token=3cea1b10a52338584999fdce55691f4ed67f29fa6d87689867f626e25d662d33&sort[]=1&order[]=ASC".format(username)
     response = requests.get(url=url, headers=request_headers)
     if response.status_code == 200:
         json_data = json.loads(response.text)
