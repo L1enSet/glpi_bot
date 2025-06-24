@@ -3,7 +3,7 @@ def registration(user, status=None):
         text = "Профиль создан\n{} {}".format(user['name'], user['surname'])
     except KeyError as exc:
         if status == 400:
-            text = "Ошибка. Сообщение администратору отправлено."
+            text = "Профиль уже существует"
         else:
             text = "0"
     return text
