@@ -13,6 +13,7 @@ def error_message(data):
         text = "Пользователь не найден."
     else:
         text = "Неизвестная ошибка."
+        #test
     return text
 
 def try_reg(username, user_id, tg_user, status):
